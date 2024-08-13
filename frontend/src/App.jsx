@@ -18,12 +18,15 @@ function App()
   useEffect(()=>
   {
     let token = sessionStorage.getItem("User");
+    // as we are storing this token in session storage which does persist on every refresh
     if(token)
     {
+      // if the token does exist it will reset the axios headers
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
     }
    
   },[])
+  // it means that whenever the app refreshes 
   
   return(<>
  <Router>

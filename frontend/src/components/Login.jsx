@@ -31,7 +31,7 @@ function Login()
         sessionStorage.setItem("User" , response)
         // in addition to send it to our session storage we will add it to our all future axois request
         axios.defaults.headers.common["Authorization"] = `Bearer ${response}`
-        // when we refresh our page it actually wipes the 
+        // when we refresh our page it actually wipes this section out so we need to add it in the app.jsx aswell
         navigate("/home")
 
 
