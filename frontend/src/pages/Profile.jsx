@@ -2,6 +2,7 @@ import BlogCard from "../components/BlogCard";
 import { useState,useEffect } from "react";
 import { getPosts } from "../api";
 import * as jwt_decode from "jwt-decode";
+import { Label } from "@/components/ui/label";
 
 function Profile()
 {
@@ -29,17 +30,18 @@ function Profile()
         loadUserData()
     },[])
 
-    return(<>
-    <label htmlFor="">Name</label>
-    <h2>{user.name}</h2><br />
-    <label htmlFor="">Email</label>
-    <h2>{user.email}</h2><br />
-    <label htmlFor="">Join Date:</label>
-    <h2>{user.joinDate}</h2><br />
+    return(
+    <div className="flex flex-col w-1/3">
+    <Label className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-2" htmlFor="">Name</Label>
+    <h2 >{user.name}</h2><br />
+    <Label className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-2" htmlFor="">Email</Label>
+    <h2 >{user.email}</h2><br />
+    <Label className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-2" htmlFor="">Join Date:</Label>
+    <h2 >{user.joinDate}</h2><br />
     {posts.map((post)=>
     {
         return <BlogCard post={post}/>
     })}
-    </>);
+    </div>);
 }
 export default Profile

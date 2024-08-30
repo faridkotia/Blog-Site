@@ -1,6 +1,8 @@
 import CreateUser from "../components/CreateUser";
 import Login from "../components/Login";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
 function Landing()
 {
     // view == 0 => login mode
@@ -13,21 +15,21 @@ function Landing()
 
 
     return(
-    <>
+    <div className="flex justify-center items-center w-screen h-screen">
          {!view ? 
-            <>
+        <div className="flex flex-col w-96">
             <Login/> 
-            <button onClick={change}>Create new Account</button>
-        </>
+            <Button onClick={change}>Create new Account</Button>
+        </div>
 
         :
 
-            <>
+            <div className="flex flex-col w-96">
             <CreateUser/>
-            <button onClick={change}>Login Existing User</button>
-            </>
+            <Button onClick={change}>Login Existing User</Button>
+            </div>
         }
     
-    </>);
+    </div>);
 }
 export default Landing

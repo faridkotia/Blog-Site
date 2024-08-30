@@ -1,5 +1,9 @@
 import { useState, useRef } from "react";
 import { createImage, createPost } from "../api";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 function CreateBlog()
 {
@@ -26,15 +30,7 @@ function CreateBlog()
             file: file
         }
        await createPost(submitObject)
-       setTitle("");
-        setDescription("");
-        setContent("");
-        setFile(null);
-
-        // Clear the file input
-        if (inputFile.current) {
-            inputFile.current.value = "";
-        }
+      
        
     }
 
@@ -58,17 +54,19 @@ function CreateBlog()
     }
 
     return(
-    <form onSubmit={handleSubmit}>
-        <label >Blog Post Title:</label>
-        <input type="text" required name="title" placeholder="Name" maxLength={100} onChange={(event)=>{setTitle(event.target.value)}} /> <br />
-        <label >Blog Desciption:</label>
-        <input type="text" required name="decription" placeholder="Decription" maxLength={200} onChange={(event)=>{setDescription(event.target.value)}} /><br />
-        <label >Blog Content:</label>
-        <textarea type="text" required name="content" placeholder="Content" maxLength={5000} onChange={(event)=>{setContent(event.target.value)}}/> <br />
-        <label >Insert Header Image:</label>
-        <input type="file" onChangeCapture={handleFileUpload} required/>
-        <button type="submit">Submit</button>
+        <div className="flex justify-center w-full">
+    <form onSubmit={handleSubmit} className="w-1/3">
+        <Label className="flex left-0 p-2">Blog Post Title:</Label>
+        <Input type="text" required name="title" placeholder="Name" maxLength={100} onChange={(event)=>{setTitle(event.target.value)}} />
+        <Label className="flex left-0 p-2">Decription:</Label>
+        <Input type="text" required name="decription" placeholder="Decription" maxLength={200} onChange={(event)=>{setDescription(event.target.value)}} />
+        <Label className="flex left-0 p-2">Content:</Label>
+        <Textarea type="text" required name="content" placeholder="Content" maxLength={5000} onChange={(event)=>{setContent(event.target.value)}}/> 
+        <Label className="flex left-0 p-2">Upload Image:</Label>
+        <Input type="file" onChangeCapture={handleFileUpload} ref={inputFile} className="cursor-pointer hover:bg-accent" required/>
+        <Button type="submit" className="mt-4">Submit</Button>
         {/* when we the button type is submit it means that it will invoke whatever function is in onSubmit*/}
-    </form>);
+    </form>
+    </div>);
 }
 export default CreateBlog

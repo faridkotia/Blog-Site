@@ -20,8 +20,8 @@ function Home()
         // and the then call the function as it allows the funtion to be async
 
     },[])
-    return(<div className="posts">
-
+    return(<div className="flex flex-col items-center w-full">
+    <div className="w-1/3 m-4">
     {
         posts.map((post)=>
         {
@@ -32,6 +32,7 @@ function Home()
             </>);
         })
     }
+    </div>
 
     </div>);
 }

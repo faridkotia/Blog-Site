@@ -19,7 +19,9 @@ function Layout()
     
     return(<>
      <Navbar/>
-    <Outlet/>
+     <main className="flex w-screen justify-center mt-24">
+         <Outlet/>
+    </main>
     </>);
    
 }

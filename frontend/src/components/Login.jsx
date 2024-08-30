@@ -1,6 +1,9 @@
 import { verifyUser } from "../api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
 // this function is used basicaaly to navigate to the homepage when we are successfully jogged in
 import axios from "axios";
 // used to call our bakend routes
@@ -43,12 +46,11 @@ function Login()
       
     }
     return(
-        <form onSubmit={handleSubmit}>
-            <label >Email:</label>
-            <input type="text" placeholder="Enter email address" required name="email" onChange={handleChange} maxLength={40}/><br />
-            <label >Password:</label>
-            <input type="password" placeholder="Enter password" required name="password" onChange={handleChange} maxLength={30}/><br />
-            <button type="submit" >Login</button>
+        <form onSubmit={handleSubmit} className="flex flex-col">
+            
+            <Input type="text" placeholder="Enter email address" required name="email" onChange={handleChange} maxLength={40} className="mb-4"/>
+            <Input type="password" placeholder="Enter password" required name="password" onChange={handleChange} maxLength={30} className="mb-4"/>
+            <Button type="submit" className="mb-4">Login</Button>
         </form>
     );
 }
