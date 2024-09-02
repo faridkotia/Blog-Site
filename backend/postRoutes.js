@@ -40,7 +40,8 @@ postRoutes.route("/posts").post(verifyToken, async (request, response) => {
         content: request.body.content,
         author: request.body.user._id,
         dateCreated: request.body.dateCreated,
-        imageId: request.body.imageId
+        imageId: request.body.imageId,
+        discussions: []
     }
     let data = await db.collection("posts").insertOne(mongoObject)
     response.json(data)
@@ -70,6 +71,51 @@ postRoutes.route("/posts/:id").delete(verifyToken, async (request, response) => 
     response.json(data)
 })
 
+// Discussion routes
+
+// Create a discussion for a specific post
+postRoutes.route("/posts/:id/discussions").post(verifyToken, async (request, response) => {
+    let db = database.getDb();
+    const discussionObject = {
+        user: request.body.user._id,
+        comment: request.body.comment,
+        dateCreated: new Date(),
+    };
+
+    console.log(`The discussion object is: ${discussionObject.comment}`);
+
+    try {
+        const data = await db.collection("posts").updateOne(
+            { _id: new ObjectId(request.params.id) },
+            { $push: { discussions: discussionObject } }
+        );
+        console.log(`The data recieved to api is: ${data}`);
+        if (data.modifiedCount > 0) {
+            response.json({ message: "Discussion added successfully." });
+        } else {
+            response.status(404).json({ message: "Post not found." });
+        }
+    } catch (error) {
+        response.status(500).json({ message: "Error adding discussion", error });
+    }
+});
+
+// Retrieve all discussions for a specific post
+postRoutes.route("/posts/:id/discussions").get(verifyToken, async (request, response) => {
+    let db = database.getDb();
+    try {
+        const post = await db.collection("posts").findOne({ _id: new ObjectId(request.params.id) });
+        if (post && post.discussions) {
+            response.json(post.discussions);
+        } else {
+            response.status(404).json({ message: "No discussions found for this post" });
+        }
+    } catch (error) {
+        response.status(500).json({ message: "Error retrieving discussions", error });
+    }
+});
+
+
 function verifyToken(request, response, next) {
     const authHeaders = request.headers["authorization"]
     const token = authHeaders && authHeaders.split(' ')[1]
@@ -86,5 +132,7 @@ function verifyToken(request, response, next) {
         next()
     })
 }
+
+
 
 module.exports = postRoutes
