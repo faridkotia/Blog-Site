@@ -4,7 +4,7 @@ function About() {
         <div style={{ padding: "20px", maxWidth: "800px", margin: "auto" }}>
           <h1>About Us</h1>
           <p>
-            Welcome to <strong>Your Blogs Name</strong>! We're passionate about sharing insightful articles, helpful tips, and inspiring stories with our readers. Our blog is a place where curious minds come to explore a wide range of topics, from technology and travel to wellness and lifestyle.
+            Welcome to <strong>Your Blog Name</strong>! We're passionate about sharing insightful articles, helpful tips, and inspiring stories with our readers. Our blog is a place where curious minds come to explore a wide range of topics, from technology and travel to wellness and lifestyle.
           </p>
           <p>
             Founded in 2024, our mission is to create a space where people can discover new ideas, learn from experts, and connect with a community of like-minded individuals. We believe in the power of storytelling and strive to deliver content that not only informs but also entertains and inspires.
